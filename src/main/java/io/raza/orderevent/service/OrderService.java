@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,7 @@ public class OrderService {
 
         OrderEntity savedOrder = orderRepository.save(order);
         OrderPlacedEvent event = new OrderPlacedEvent(
+                UUID.randomUUID(),
                 savedOrder.getId(),
                 savedOrder.getCustomerId(),
                 savedOrder.getProductId(),
